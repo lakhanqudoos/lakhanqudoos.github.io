@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Abdul Qudoos – Computer science student, machine learning</title>
+<meta name="description" content="Portfolio of Abdul Qudoos: machine learning projects in Python, a Streamlit sales and profit prediction app, and an internship at National Bank of Pakistan.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0c1124; --bg2:#121a35; --ink:#eef1fb; --muted:#9aa4c4; --rule:#25305a;
+  --a:#5ce1e6; --b:#8f84ff; --btn-ink:#06101c;
+  --head:"Bricolage Grotesque","Instrument Sans",system-ui,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme:light){
+  :root{--bg:#f5f7fd;--bg2:#e9edfa;--ink:#141a33;--muted:#53608a;--rule:#cfd6ee;--a:#0a7f8a;--b:#5a4fe0;--btn-ink:#fff;color-scheme:light}
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+a{color:var(--a);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--a);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+
+/* Nav */
+nav{position:fixed;inset:0 0 auto 0;z-index:20;backdrop-filter:blur(12px);background:color-mix(in srgb,var(--bg) 70%,transparent);border-bottom:1px solid transparent;transition:border-color .3s}
+nav.scrolled{border-color:var(--rule)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font:700 1.1rem var(--head);color:var(--ink);text-decoration:none}
+nav ul{display:flex;gap:6px;list-style:none;margin:0;padding:0}
+nav ul a{display:block;padding:6px 12px;color:var(--muted);text-decoration:none;font-weight:500;font-size:.95rem;border-radius:20px;transition:color .2s,background .2s}
+nav ul a:hover{color:var(--ink)}
+nav ul a.on{color:var(--ink);background:color-mix(in srgb,var(--a) 16%,transparent)}
+@media(max-width:640px){nav ul li:nth-child(n+4){display:none}}
+
+/* Hero */
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;background:radial-gradient(900px 500px at 85% 40%,var(--bg2),transparent 70%)}
+#net{position:absolute;inset:0;width:100%;height:100%}
+.hero .wrap{position:relative;z-index:2;width:100%;padding-top:90px;padding-bottom:70px;pointer-events:none}
+.hero .wrap>*{max-width:560px}
+.hero .wrap>*{pointer-events:auto}
+.hero small{display:block;font-weight:500;color:var(--muted);margin-bottom:18px;font-size:1rem}
+.hero h1{font:700 clamp(2.3rem,5.2vw,3.9rem)/1.05 var(--head);letter-spacing:-.03em;margin:0 0 24px}
+.hero p{max-width:50ch;color:var(--muted);font-size:1.1rem;margin:0 0 34px}
+.row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn{display:inline-block;padding:12px 22px;border-radius:8px;font-weight:600;text-decoration:none;transition:transform .2s,box-shadow .2s}
+.btn.p{background:linear-gradient(120deg,var(--a),var(--b));color:var(--btn-ink)}
+.btn.p:hover{transform:translateY(-2px);box-shadow:0 10px 28px -8px var(--b)}
+.btn.s{border:1px solid var(--rule);color:var(--ink)}
+.btn.s:hover{border-color:var(--a)}
+.soc{margin-top:26px;display:flex;gap:20px;flex-wrap:wrap}
+.soc a{color:var(--muted);text-decoration:none;font-weight:500}
+.soc a:hover{color:var(--a)}
+.hero .cue{position:absolute;left:50%;bottom:22px;width:22px;height:36px;border:2px solid var(--muted);border-radius:12px;opacity:.6;transform:translateX(-50%)}
+.hero .cue::after{content:"";position:absolute;left:50%;top:6px;width:4px;height:7px;margin-left:-2px;border-radius:2px;background:var(--muted);animation:cue 1.8s infinite}
+@keyframes cue{0%{opacity:0;transform:translateY(0)}30%{opacity:1}100%{opacity:0;transform:translateY(12px)}}
+
+/* Sections */
+section.s{padding:96px 0 8px}
+h2{font:700 clamp(1.8rem,4vw,2.6rem)/1.1 var(--head);letter-spacing:-.02em;margin:0 0 34px}
+.about{max-width:62ch;font-size:1.12rem;color:var(--muted)}
+.about strong{color:var(--ink);font-weight:600}
+
+/* Projects */
+.proj{position:relative;display:grid;gap:8px 32px;padding:26px 22px;margin:0 -22px;border-bottom:1px solid var(--rule);border-radius:14px;}
+.proj:hover{background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--a) 13%,transparent),transparent 65%)}
+.proj::before{content:"";position:absolute;left:0;top:26px;bottom:26px;width:3px;border-radius:2px;background:linear-gradient(var(--a),var(--b));transform:scaleY(0);transition:transform .35s}
+.proj:hover::before{transform:scaleY(1)}
+@media(min-width:700px){.proj{grid-template-columns:minmax(0,1fr) auto}}
+.proj h3{margin:0;font:600 1.35rem var(--head);letter-spacing:-.01em;transition:transform .3s}
+.proj:hover h3{transform:translateX(8px)}
+.proj p{margin:6px 0 0;max-width:58ch;color:var(--muted)}
+.proj .m{color:var(--muted);font-size:.93rem}
+@media(min-width:700px){.proj .m{text-align:right}}
+.proj .m a{font-weight:600;margin-right:14px}
+.proj .m a:last-child{margin-right:0}
+.tag{display:inline-block;margin-left:10px;padding:2px 9px;font:600 .75rem var(--body);border-radius:20px;background:color-mix(in srgb,var(--a) 18%,transparent);color:var(--a);vertical-align:3px}
+
+/* Timeline */
+.tl{position:relative;padding-left:34px;--p:0}
+.tl::before,.tl::after{content:"";position:absolute;left:6px;top:8px;width:2px;border-radius:2px}
+.tl::before{bottom:8px;background:var(--rule)}
+.tl::after{height:calc((100% - 16px)*var(--p));background:linear-gradient(var(--a),var(--b))}
+.job{position:relative;padding-bottom:40px}
+.job:last-child{padding-bottom:0}
+.job::before{content:"";position:absolute;left:-34px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:2px solid var(--rule);transition:border-color .4s,background .4s}
+.job.in::before{border-color:var(--a);background:var(--a)}
+.jh{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2px 24px}
+.job h3{margin:0;font:600 1.25rem var(--head)}
+.when{color:var(--muted);font-size:.95rem}
+.org{margin:2px 0 10px;color:var(--a);font-weight:500}
+.job ul{margin:0;padding-left:20px;max-width:64ch;color:var(--muted)}
+.job li{margin-bottom:6px}
+
+/* Skills */
+.sk{display:grid;gap:26px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.sk h3{margin:0 0 12px;font:600 1.05rem var(--head)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{padding:6px 13px;border:1px solid var(--rule);border-radius:20px;font-size:.92rem;transition:border-color .2s,transform .2s,color .2s}
+.chips span:hover{border-color:var(--a);color:var(--a);transform:translateY(-2px)}
+.edu{margin-top:64px;padding-top:30px;border-top:1px solid var(--rule)}
+.edu h3{margin:0;font:600 1.25rem var(--head)}
+.edu p{margin:4px 0 0;color:var(--muted)}
+
+/* Contact */
+.contact{padding:110px 0 70px;text-align:left}
+.contact h2{max-width:14ch;font-size:clamp(2.2rem,6vw,4rem)}
+.mail{display:inline-block;font:600 clamp(1.1rem,3.2vw,1.9rem) var(--head);color:var(--ink);text-decoration:none;background:linear-gradient(var(--a),var(--a)) 0 100%/0 3px no-repeat;transition:background-size .4s;padding-bottom:4px;word-break:break-all}
+.mail:hover{background-size:100% 3px}
+footer{padding:0 0 40px;color:var(--muted);font-size:.9rem}
+
+/* Reveal (only when JS runs) */
+.js .rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;transition-delay:calc(var(--i,0)*90ms)}
+.js .rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .js .rv{opacity:1;transform:none;transition:none}
+  .cue::after{animation:none}
+  *{transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+
+<nav id="nav">
+  <div class="wrap">
+    <a class="logo" href="#top">Abdul Qudoos</a>
+    <ul>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <canvas id="net" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <small class="rv" style="--i:0">Computer science student in Karachi</small>
+    <h1 class="rv" style="--i:1">I build machine learning projects and understand the networks they run on.</h1>
+    <p class="rv" style="--i:2">Third year at SMIU. I train models in Python, turn them into small apps, and spent six weeks inside the IT infrastructure group at National Bank of Pakistan.</p>
+    <div class="row rv" style="--i:3">
+      <a class="btn p" href="#projects">See my projects</a>
+      <!-- TODO: upload your resume PDF to the same repo with this exact file name -->
+      <a class="btn s" href="Abdul_Qudoos_Resume.pdf">Download resume</a>
+    </div>
+    <div class="soc rv" style="--i:4">
+      <!-- TODO: replace your-username with your real GitHub username -->
+      <a href="https://github.com/your-username">GitHub</a>
+      <a href="https://www.linkedin.com/in/abdul-qudoos05/">LinkedIn</a>
+      <a href="mailto:qudoosabdul699@gmail.com">Email</a>
+    </div>
+  </div>
+  <div class="cue" aria-hidden="true"></div>
+</header>
+
+<main class="wrap">
+
+  <section class="s" id="about">
+    <p class="about rv">I like learning by building. My projects cover <strong>classification, regression, text classification and a small web app</strong>. I’m applying to the MLH Fellowship to work on open-source code, get feedback from experienced engineers, and grow as a developer.</p>
+  </section>
+
+  <section class="s" id="projects">
+    <h2 class="rv">Projects</h2>
+
+    <article class="proj rv">
+      <div>
+        <h3>Sales Analytics &amp; Profit Prediction App<span class="tag">Latest</span></h3>
+        <p>A web app that explores sales data and predicts profit with a machine learning model. Built with a teammate: data cleaning, model training and evaluation, then a Streamlit interface anyone can use without writing code.</p>
+      </div>
+      <div class="m">Python, Pandas, Scikit-learn, Streamlit<br>
+        <!-- TODO: add your GitHub repo link and your live Streamlit app link -->
+        <a href="https://github.com/your-username/sales-profit-prediction">Code</a><a href="https://your-app-name.streamlit.app">Live app</a>
+      </div>
+    </article>
+
+    <article class="proj rv">
+      <div><h3>Heart Disease Prediction</h3>
+        <p>Trained and compared classification models on a healthcare dataset to predict heart disease risk.</p></div>
+      <div class="m">Python, Scikit-learn<br><a href="https://github.com/your-username/heart-disease-prediction">Code</a></div>
+    </article>
+
+    <article class="proj rv">
+      <div><h3>House Price Prediction</h3>
+        <p>A regression model that estimates house prices from property features, with data preprocessing and evaluation.</p></div>
+      <div class="m">Python, Pandas, Scikit-learn<br><a href="https://github.com/your-username/house-price-prediction">Code</a></div>
+    </article>
+
+    <article class="proj rv">
+      <div><h3>Email Spam Classification</h3>
+        <p>Turns email text into features and trains a classifier that separates spam from normal mail.</p></div>
+      <div class="m">Python, NLP basics<br><a href="https://github.com/your-username/email-spam-classification">Code</a></div>
+    </article>
+
+    <article class="proj rv">
+      <div><h3>Coffee Shop Sales Analysis</h3>
+        <p>Analysis and charts that show which products and time periods drive sales.</p></div>
+      <div class="m">Python, Pandas, Matplotlib<br><a href="https://github.com/your-username/coffee-shop-sales-analysis">Code</a></div>
+    </article>
+  </section>
+
+  <section class="s" id="experience">
+    <h2 class="rv">Experience</h2>
+    <div class="tl" id="tl">
+      <div class="job rv">
+        <div class="jh"><h3>Intern, Infrastructure Technology Group (WAN Core)</h3><span class="when">Month Year – Month Year (6 weeks)</span></div>
+        <p class="org">National Bank of Pakistan, Head Office, Karachi</p>
+        <ul>
+          <li>Rotated through the WAN Core, Campus Network, Firewall/Internet and Microsoft Services teams of a bank network that connects 1,500+ branches.</li>
+          <li>Practiced IP planning by working out CIDR and VLSM subnets for a hypothetical new branch network.</li>
+          <li>Shadowed engineers setting up Cisco trunk ports for inter-VLAN routing and IP phones, and diagnosing connectivity problems with ping, traceroute and spanning-tree analysis.</li>
+          <li>Studied OSPF, EIGRP and BGP routing, IPsec VPNs, SD-WAN, and how DHCP, DNS and Active Directory depend on the network.</li>
+        </ul>
+      </div>
+      <div class="job rv">
+        <div class="jh"><h3>Digital Empowerment Internship (Online)</h3><span class="when">Month Year – Month Year</span></div>
+        <ul><li>Completed an online internship focused on digital tools, basic data handling and structured problem solving.</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="s" id="skills">
+    <h2 class="rv">Skills</h2>
+    <div class="sk">
+      <div class="rv" style="--i:0"><h3>Languages</h3><div class="chips"><span>Python</span></div></div>
+      <div class="rv" style="--i:1"><h3>Data and machine learning</h3><div class="chips"><span>Pandas</span><span>NumPy</span><span>Matplotlib</span><span>Scikit-learn</span><span>Data cleaning</span><span>Visualization</span><span>Regression</span><span>Classification</span><span>Basic NLP</span></div></div>
+      <div class="rv" style="--i:2"><h3>Tools</h3><div class="chips"><span>Jupyter Notebook</span><span>Streamlit</span><span>Excel</span></div></div>
+      <div class="rv" style="--i:3"><h3>Networking</h3><div class="chips"><span>Subnetting (CIDR, VLSM)</span><span>VLANs</span><span>OSPF and BGP basics</span><span>IPsec VPN concepts</span></div></div>
+    </div>
+    <div class="edu rv">
+      <h3>Bachelor of Science in Computer Science, batch 2023</h3>
+      <p>Sindh Madressatul Islam University (SMIU), Karachi. Currently in 6th semester.</p>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <h2 class="rv">Let’s talk.</h2>
+    <a class="mail rv" style="--i:1" href="mailto:qudoosabdul699@gmail.com">qudoosabdul699@gmail.com</a>
+  </section>
+</main>
+
+<footer><div class="wrap">© Abdul Qudoos</div></footer>
+
+<script>
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Reveal on scroll */
+  var rv = document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    },{threshold:.15});
+    rv.forEach(function(el){ io.observe(el); });
+  } else { rv.forEach(function(el){ el.classList.add('in'); }); }
+
+  /* Nav: shadow + active section */
+  var nav = document.getElementById('nav');
+  var links = [].slice.call(document.querySelectorAll('nav ul a'));
+  var secs = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+  var tl = document.getElementById('tl');
+  function onScroll(){
+    nav.classList.toggle('scrolled', scrollY > 10);
+    var y = scrollY + innerHeight * .35, cur = -1;
+    secs.forEach(function(s,i){ if(s && s.offsetTop <= y) cur = i; });
+    links.forEach(function(a,i){ a.classList.toggle('on', i === cur); });
+    var r = tl.getBoundingClientRect();
+    var p = (innerHeight * .6 - r.top) / r.height;
+    tl.style.setProperty('--p', Math.max(0, Math.min(1, p)));
+  }
+  addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  /* Spotlight follows the pointer on project rows */
+  document.querySelectorAll('.proj').forEach(function(p){
+    p.addEventListener('pointermove', function(e){
+      var b = p.getBoundingClientRect();
+      p.style.setProperty('--mx', (e.clientX - b.left) + 'px');
+      p.style.setProperty('--my', (e.clientY - b.top) + 'px');
+    });
+  });
+
+  /* Hero: a small neural network that doubles as a network topology.
+     Packets travel along the links; nodes near the pointer light up. */
+  var cv = document.getElementById('net'), cx = cv.getContext('2d');
+  var W, H, dpr, nodes, edges, pulses = [], mouse = {x:-999,y:-999}, running = true, cA, cB;
+  var layers = [3,5,5,3];
+
+  function colors(){
+    var s = getComputedStyle(document.documentElement);
+    cA = s.getPropertyValue('--a').trim(); cB = s.getPropertyValue('--b').trim();
+  }
+  function build(){
+    dpr = Math.min(devicePixelRatio || 1, 2);
+    W = cv.clientWidth; H = cv.clientHeight;
+    cv.width = W * dpr; cv.height = H * dpr; cx.setTransform(dpr,0,0,dpr,0,0);
+    var wide = W > 900;
+    var x0 = wide ? W * .6 : W * .12, x1 = wide ? W * .95 : W * .92;
+    var y0 = H * .2, y1 = H * .8;
+    nodes = []; edges = [];
+    layers.forEach(function(n,li){
+      for(var i=0;i<n;i++){
+        nodes.push({
+          l: li,
+          x: x0 + (x1 - x0) * li / (layers.length - 1) + (Math.random()-.5) * 18,
+          y: y0 + (y1 - y0) * (n === 1 ? .5 : i / (n - 1)) + (Math.random()-.5) * 18,
+          ph: Math.random() * 6.28, glow: 0
+        });
+      }
+    });
+    nodes.forEach(function(a){ nodes.forEach(function(b){ if(b.l === a.l + 1) edges.push([a,b]); }); });
+  }
+  function spawn(){
+    var e = edges[Math.floor(Math.random() * edges.length)];
+    pulses.push({e:e, t:0, v:.006 + Math.random() * .008, c: Math.random() < .5 ? cA : cB});
+  }
+  function frame(t){
+    if(!running){ return; }
+    cx.clearRect(0,0,W,H);
+    cx.lineWidth = 1;
+    edges.forEach(function(e){
+      cx.strokeStyle = cA; cx.globalAlpha = .13;
+      cx.beginPath(); cx.moveTo(e[0].x,e[0].y); cx.lineTo(e[1].x,e[1].y); cx.stroke();
+    });
+    if(!reduce && pulses.length < 26 && Math.random() < .25) spawn();
+    pulses = pulses.filter(function(p){
+      p.t += p.v;
+      var a = p.e[0], b = p.e[1], x = a.x + (b.x - a.x) * p.t, y = a.y + (b.y - a.y) * p.t;
+      var g = cx.createRadialGradient(x,y,0,x,y,10);
+      g.addColorStop(0,p.c); g.addColorStop(1,'transparent');
+      cx.globalAlpha = .9; cx.fillStyle = g; cx.beginPath(); cx.arc(x,y,10,0,6.28); cx.fill();
+      if(p.t >= 1){ b.glow = 1; return false; }
+      return true;
+    });
+    nodes.forEach(function(n){
+      var dx = n.x - mouse.x, dy = n.y - mouse.y, d = Math.sqrt(dx*dx + dy*dy);
+      var near = d < 140 ? 1 - d / 140 : 0;
+      n.glow = Math.max(n.glow * .94, near);
+      var r = 5 + Math.sin(t / 900 + n.ph) * 1 + n.glow * 5;
+      cx.globalAlpha = .25 + n.glow * .6; cx.fillStyle = cB;
+      cx.beginPath(); cx.arc(n.x,n.y,r + 6,0,6.28); cx.fill();
+      cx.globalAlpha = 1; cx.fillStyle = cA;
+      cx.beginPath(); cx.arc(n.x,n.y,r,0,6.28); cx.fill();
+    });
+    cx.globalAlpha = 1;
+    if(!reduce) requestAnimationFrame(frame);
+  }
+  colors(); build(); frame(0);
+  addEventListener('resize', function(){ build(); if(reduce) frame(0); });
+  matchMedia('(prefers-color-scheme: light)').addEventListener('change', function(){ colors(); if(reduce) frame(0); });
+  document.getElementById('top').addEventListener('pointermove', function(e){
+    var b = cv.getBoundingClientRect(); mouse.x = e.clientX - b.left; mouse.y = e.clientY - b.top;
+  });
+  document.getElementById('top').addEventListener('pointerleave', function(){ mouse.x = mouse.y = -999; });
+  /* Stop drawing when the hero is off screen */
+  if('IntersectionObserver' in window && !reduce){
+    new IntersectionObserver(function(es){
+      var vis = es[0].isIntersecting;
+      if(vis && !running){ running = true; requestAnimationFrame(frame); } else if(!vis){ running = false; }
+    }).observe(document.getElementById('top'));
+  }
+})();
+</script>
+</body>
+</html>
